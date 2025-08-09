@@ -6,16 +6,16 @@ A CLI tool to flatten complex data structures into a simple, human-readable form
 
 ### Linux / macOS
 ```bash
-curl -fsSL https://raw.githubusercontent.com/yourusername/flatten-go/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/z1shivam/flatten-go/main/install.sh | bash
 ```
 
 ### Windows (PowerShell)
 ```powershell
-irm https://raw.githubusercontent.com/yourusername/flatten-go/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/z1shivam/flatten-go/main/install.ps1 | iex
 ```
 
 ### Manual Installation
-1. Go to the [Releases](https://github.com/yourusername/flatten-go/releases) page.
+1. Go to the [Releases](https://github.com/z1shivam/flatten-go/releases) page.
 2. Download the binary for your OS and architecture:
    - **Linux/macOS:** `flatten-linux-amd64` or `flatten-darwin-arm64`, etc.
    - **Windows:** `flatten-windows-amd64.exe`
