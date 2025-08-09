@@ -1,15 +1,28 @@
-$repo = "yourusername/flatten-go"
-$version = (Invoke-RestMethod "https://api.github.com/repos/$repo/releases/latest").tag_name
-$os = "windows"
-$arch = "amd64"
+$repo = "z1shivam/flatten-go"
+$latestRelease = Invoke-RestMethod -Uri "https://api.github.com/repos/$repo/releases/latest"
+$version = $latestRelease.tag_name
+$asset = $latestRelease.assets | Where-Object { $_.name -match "windows" } | Select-Object -First 1
 
-$url = "https://github.com/$repo/releases/download/$version/flatten-$os-$arch.exe"
-$dest = "$env:USERPROFILE\.local\bin"
+if (-not $asset) {
+    Write-Error "No Windows binary found in the latest release."
+    exit 1
+}
 
-New-Item -ItemType Directory -Force -Path $dest | Out-Null
-Invoke-WebRequest -Uri $url -OutFile "$dest\flatten.exe"
+$outFile = "$env:TEMP\$($asset.name)"
+Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $outFile
 
-$env:PATH += ";$dest"
-[Environment]::SetEnvironmentVariable("PATH", $env:PATH, [System.EnvironmentVariableTarget]::User)
+# Choose install location
+$installDir = "$env:USERPROFILE\.local\bin"
+if (-not (Test-Path $installDir)) {
+    New-Item -ItemType Directory -Force -Path $installDir | Out-Null
+}
 
-Write-Host "✅ Installed flatten $version"
+Move-Item -Force $outFile "$installDir\flatten-go.exe"
+
+# Add to PATH if needed
+if ($env:PATH -notlike "*$installDir*") {
+    setx PATH "$($env:PATH);$installDir"
+    Write-Host "Added $installDir to PATH. Restart your terminal."
+}
+
+Write-Host "✅ flatten-go v$version installed successfully."

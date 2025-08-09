@@ -11,7 +11,7 @@ curl -fsSL https://raw.githubusercontent.com/z1shivam/flatten-go/main/install.sh
 
 ### Windows (PowerShell)
 ```powershell
-irm https://raw.githubusercontent.com/z1shivam/flatten-go/main/install.ps1 | iex
+iwr -useb https://raw.githubusercontent.com/z1shivam/flatten-go/main/install.ps1 | iex
 ```
 
 ### Manual Installation
