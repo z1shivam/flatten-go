@@ -1,6 +1,6 @@
 # Flatten Go
 
-A CLI tool to flatten complex data structures into a simple, human-readable format.
+A simple tool to collect all the files of a folder into one place.
 
 ## Installation
 
