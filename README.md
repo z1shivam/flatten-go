@@ -20,8 +20,8 @@ iwr -useb https://raw.githubusercontent.com/z1shivam/flatten-go/main/install.ps1
    - **Linux/macOS:** `flatten-linux-amd64` or `flatten-darwin-arm64`, etc.
    - **Windows:** `flatten-windows-amd64.exe`
 3. Place the binary somewhere in your system `PATH`:
-   - **Linux/macOS:** Move it to `/usr/local/bin` and run `chmod +x flatten`
-   - **Windows:** Move it to a folder in your `PATH` or update `PATH` via System Settings.
+   - **Linux/macOS:** Move it to `/usr/local/bin`, rename to `flatten` and run `chmod +x flatten`
+   - **Windows:** Move it to a folder in your `PATH`, rename to `flatten.exe`
 
 ## Usage
 ```bash
