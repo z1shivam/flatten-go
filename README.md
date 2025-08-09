@@ -1,98 +1,48 @@
-# flatten-go
+# Flatten Go
 
-**flatten-go** is a lightweight CLI tool written in Go that flattens the structure of a folder by moving all files (from nested directories) into a single output folder.
+A CLI tool to flatten complex data structures into a simple, human-readable format.
 
-## ✨ Features
-- **Simple** — One command, one folder, done.
-- **Safe** — Prompts before overwriting existing folders.
-- **Cross-platform** — Works on Windows, macOS, and Linux.
-- **No dependencies** — Single binary; no need to install Python, Node, etc.
-- **Version flag** — Quickly check the installed version.
+## Installation
 
----
-
-## 📦 Installation
-
-### From GitHub Releases
-1. Go to the [Releases page](https://github.com/yourusername/flatten-go/releases).
-2. Download the binary for your OS.
-3. Place it somewhere in your `PATH`.
-
-Example (Linux/Mac):
+### Linux / macOS
 ```bash
-sudo mv flatten /usr/local/bin/
-chmod +x /usr/local/bin/flatten
+curl -fsSL https://raw.githubusercontent.com/yourusername/flatten-go/main/install.sh | bash
 ```
 
-Example (Windows PowerShell):
+### Windows (PowerShell)
 ```powershell
-Move-Item .\flatten.exe $HOME\.local\bin\
-$env:PATH += ";$HOME\.local\bin"
+irm https://raw.githubusercontent.com/yourusername/flatten-go/main/install.ps1 | iex
 ```
 
----
+### Manual Installation
+1. Go to the [Releases](https://github.com/yourusername/flatten-go/releases) page.
+2. Download the binary for your OS and architecture:
+   - **Linux/macOS:** `flatten-linux-amd64` or `flatten-darwin-arm64`, etc.
+   - **Windows:** `flatten-windows-amd64.exe`
+3. Place the binary somewhere in your system `PATH`:
+   - **Linux/macOS:** Move it to `/usr/local/bin` and run `chmod +x flatten`
+   - **Windows:** Move it to a folder in your `PATH` or update `PATH` via System Settings.
 
-## 🛠 Building from Source
-You need [Go](https://go.dev/dl/) installed.
-
-```bash
-git clone https://github.com/yourusername/flatten-go.git
-cd flatten-go
-go build -ldflags "-X main.version=v0.0.1" -o flatten
-```
-
-On Windows:
-```powershell
-go build -ldflags "-X main.version=v0.0.1" -o flatten.exe
-```
-
----
-
-## 🚀 Usage
-
-```bash
-flatten <folder-name>
-```
-
-### Example
-```bash
-flatten photos
-```
-This will:
-1. Check if the folder exists.
-2. Create a new folder named `flatten_photos`.
-3. Move **all files** from `photos` and its subfolders into `flatten_photos`.
-
----
-
-## ⚠ Rules & Behavior
-- **Only one folder** can be given at a time.
-- If the folder doesn’t exist → Error: `Folder not found`.
-- If `flatten_<folder>` already exists → Prompt:  
-  ```
-  ⚠️  folder 'flatten_<folder>' already exists. Overwrite? (y/N):
-  ```
-  - Default = `N`  
-  - If `N` and `_1` exists, prompt again with `_2`, and so on.
-- Version check:
+## Usage
 ```bash
 flatten --version
+flatten input.json
 ```
 
----
+## Development
 
-## 📄 License
-MIT License — feel free to use, modify, and distribute.
-
----
-
-## 💡 Example Run
+### Build
 ```bash
-$ flatten music
-Flattening folder: music → flatten_music
-Done! All files moved into 'flatten_music'.
+go build -o flatten main.go
 ```
+
+### Run Tests
 ```bash
-$ flatten --version
-flatten version v0.0.1
+go test ./...
 ```
+
+## How It Works
+1. Detects your OS and architecture.
+2. Downloads the latest binary from GitHub Releases.
+3. Places it into your system's PATH.
+4. Makes it executable and ready to use.
