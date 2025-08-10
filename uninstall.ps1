@@ -1,4 +1,4 @@
-﻿# PowerShell script to uninstall flatten
+# PowerShell script to uninstall flatten
 $installDir = "$env:USERPROFILE\.local\bin"
 $binaryPath = "$installDir\flatten.exe"
 
@@ -12,19 +12,25 @@ if (Test-Path $binaryPath) {
     Write-Host "flatten.exe not found at: $binaryPath"
 }
 
-# Remove from PATH
+# Remove from PATH if it was added by our installer
 $currentPath = [Environment]::GetEnvironmentVariable("PATH", "User")
 if ($currentPath -like "*$installDir*") {
+    # Remove our directory from PATH
     $pathEntries = $currentPath -split ';' | Where-Object { $_ -ne $installDir -and $_ -ne "" }
     $newPath = $pathEntries -join ';'
+    
+    # Update PATH permanently
     [Environment]::SetEnvironmentVariable("PATH", $newPath, "User")
+    
+    # Update PATH for current session
     $env:PATH = ($env:PATH -split ';' | Where-Object { $_ -ne $installDir }) -join ';'
+    
     Write-Host "Removed $installDir from PATH"
 } else {
     Write-Host "$installDir was not in PATH"
 }
 
-# Clean up empty directory
+# Clean up empty directory if it only contained our binary
 if (Test-Path $installDir) {
     $items = Get-ChildItem $installDir -Force -ErrorAction SilentlyContinue
     if (-not $items -or $items.Count -eq 0) {
@@ -37,3 +43,4 @@ if (Test-Path $installDir) {
 
 Write-Host ""
 Write-Host "flatten has been successfully uninstalled!"
+Write-Host "You may need to restart your terminal for PATH changes to take effect."
