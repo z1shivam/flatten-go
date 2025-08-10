@@ -23,6 +23,24 @@ iwr -useb https://raw.githubusercontent.com/z1shivam/flatten-go/main/install.ps1
    - **Linux/macOS:** Move it to `/usr/local/bin`, rename to `flatten` and run `chmod +x flatten`
    - **Windows:** Move it to a folder in your `PATH`, rename to `flatten.exe`
 
+## Uninstallation
+
+To remove flatten from your system:
+
+### Linux / macOS
+```bash
+curl -fsSL https://raw.githubusercontent.com/z1shivam/flatten-go/main/uninstall.sh | bash
+```
+
+### Windows (PowerShell)
+```powershell
+iwr -useb https://raw.githubusercontent.com/z1shivam/flatten-go/main/uninstall.ps1 | iex
+```
+
+### Manual Uninstallation
+- **Linux/macOS:** Remove `~/.local/bin/flatten` and update your shell config files
+- **Windows:** Remove `%USERPROFILE%\.local\bin\flatten.exe` and update your PATH
+
 ## Usage
 ```bash
 flatten --version
