@@ -1,6 +1,6 @@
 # Flatten Go
 
-A simple tool to collect all the files of a folder into one place.
+A simple tool to collect all the files of a folder into one place. It go through all the subdirectories and folders and collect every file and put it in a new folder everything in one place. It copies files and not move it. So, doesn't mess with your actual folder structure.
 
 ## Installation
 
